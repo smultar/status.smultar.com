@@ -1,0 +1,109 @@
+$background: #000000;
+$transparent: #00000000;
+$background-blur: rgba($background, 0.918);
+$dividers: #484848;
+$dividers-alt: #ffffff;
+$font-color: #ffffff;
+$font-color-alt: #707070;
+$accent: #0073ff;
+
+$boot: #00EDFF;
+$main: #7700FF;
+$dev: #7700FF;
+$fail: #FF0000;
+$slow: #fa6400;
+$load: #FFAA00;
+$on: #88FF00;
+$off: #484848;
+
+html {
+    height: 100%; width: 100%;
+    display: flex; box-sizing: border-box;
+
+    margin: 0px; background-color: $background;
+
+    font-family: 'Roboto', sans-serif; transition: all ease 0.3s;
+
+    color: $font-color;
+
+}
+
+body {
+    @extend html;
+
+    
+    .page {
+        @extend html; height: auto;
+        flex-direction: column;
+        
+        .example {
+            display: flex; flex-direction: row;
+        }
+    }
+    
+    #__next {
+        @extend .page;
+    }
+
+}
+
+
+svg {
+    fill: red;
+}
+
+/* Selections */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+    width: 6px; height: 2px;
+    transition: all 0.7s ease;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #666666;
+    border: 0px none #ffffff;
+    border-radius: 5px;
+    transition: all 0.7s ease;
+
+    &:hover {
+        background: #ffffff;
+    }
+}
+
+::-webkit-scrollbar-track {
+    background-color: $transparent;
+    border: 0px none #ffffff;
+    transition: all 0.7s ease;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.click {
+    cursor: pointer;
+}
+
+::selection {
+    color: $font-color;
+    background: $accent;
+    padding: 5px;
+    border-radius: 5px
+}
+
+  @import "./animations.scss";
+  @import "./layouts.scss";
+  @import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap);
