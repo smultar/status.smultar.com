@@ -45,7 +45,17 @@ const Main = () => {
       <Head>
         <title>Status | Smultar</title>
         <meta name="description" content="Supporting mods creators around the globe." />
+        <meta name="keywords" content="Smultar, Games, Aether Link, Aether, Final Fantasy, Services, Free, Quality, Patreon, Prometheus, Blender"/>
+        <meta name="theme-color" content="#B83200"/>
+        <meta name="language" content="English"/>
+        <meta name="author" content="Smultar"/>
+        <meta property="og:site_name" content="Smultar" />
         <link rel="icon" href="/svgs/smultar.svg" />
+        <meta property="og:title" content="Performance Report | Smultar"/>
+        <meta property="og:description" content="Performance at a glance, letting you know whats up with my network."/>
+        <meta property="og:image" content="http://status.smultar.com/img/og/og.png"/>
+        <meta property="og:image:secure_url" content="https://status.smultar.com/img/og/og.png"/>
+        <meta property="og:image:type" content="image/png"></meta>
       </Head>
 
       <div className='page-content'>
