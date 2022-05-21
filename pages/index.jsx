@@ -80,8 +80,6 @@ const Main = () => {
                 }
                 { services.length >= 1 && 
                   services.map((service, index) => {
-                      console.log(service);
-
                       return (
                         <Service key={index} name={service.name} image={service.image} status={service.status} sub={service.sub} index={index} selected={(selected == index)} select={() => {(selected == index) ? setSelected(null) : setSelected(index)}}/>
                       )
