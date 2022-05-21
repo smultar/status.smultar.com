@@ -72,6 +72,17 @@ export default async function handler(request, response) {
                   uid: "grafanacloud-prom"
                 },
                 editorMode: "code",
+                expr: "avg(probe_duration_seconds{probe=~\".*\", instance=\"https://wasabi.com\", job=\"Aether Link - CDN\"} * on (instance, job,probe,config_version) group_left probe_success{probe=~\".*\",instance=\"https://wasabi.com\", job=\"Aether Link - CDN\"} >= 0) by (probe)",
+                legendFormat: "AL-CDN",
+                range: true,
+                refId: "Aether Link CDN"
+              },              
+              {
+                datasource: {
+                  type: "prometheus",
+                  uid: "grafanacloud-prom"
+                },
+                editorMode: "code",
                 expr: "avg(probe_duration_seconds{probe=~\".*\", instance=\"https://prometheus.support/\", job=\"Prometheus - Dashboard\"} * on (instance, job,probe,config_version) group_left probe_success{probe=~\".*\",instance=\"https://prometheus.support/\", job=\"Prometheus - Dashboard\"} >= 0) by (probe)",
                 legendFormat: "PM-WEB",
                 range: true,
@@ -101,6 +112,9 @@ export default async function handler(request, response) {
 
         return {
             aetherlink: {
+                cdn: {
+                    ping: latency('ms', processed.results['Aether Link CDN'].frames[0].data.values[1][0]),
+                },
                 live: {
                     ping: latency('ms', processed.results['Aether Link Live'].frames[0].data.values[1][0]),
                 },
@@ -146,9 +160,9 @@ export default async function handler(request, response) {
                         name: 'content delivery',
                         image: '/svgs/aetherlink-cdn.svg',
                         status: {
-                            ping: 0,
+                            ping: cache.services.aetherlink.cdn.ping,
                             type: 'upload server',
-                            state: 'disabled',
+                            state: 'active',
                             url: 'https://cdn.aetherlink.app/',
                         },
                     },
