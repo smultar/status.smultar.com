@@ -26,10 +26,12 @@ const Main = () => {
       fetchServices();
     }, 2 * 1000);
 
-    setInterval(() => {
-      fetchServices();
-    }, 30 * 1000);
+  }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => fetchServices(),30 * 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
