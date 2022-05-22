@@ -106,4 +106,4 @@ const Main = () => {
   )
 };
 
-export default dynamic(() => Promise.resolve(Main), { ssr: true });
+export default Main;
