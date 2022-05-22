@@ -55,8 +55,8 @@ const Main = () => {
         <link rel="icon" href="/svgs/smultar.svg" />
         <meta key='ogTitle' property="og:title" content="Performance Report | Smultar"/>
         <meta key='ogDescription'property="og:description" content="Performance at a glance, letting you know whats up with my network."/>
-        <meta key='ogImage' property="og:image" content="http://status.smultar.com/img/og/og.png"/>
-        <meta key='ogImageSecured'property="og:image:secure_url" content="https://status.smultar.com/img/og/og.png"/>
+        <meta key='ogImage' property="og:image" content="http://status.smultar.com/images/logo.png"/>
+        <meta key='ogImageSecured'property="og:image:secure_url" content="https://status.smultar.com/images/logo.png"/>
         <meta key='ogImageType' property="og:image:type" content="image/png"></meta>
       </Head>
 
