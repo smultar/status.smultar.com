@@ -48,7 +48,7 @@ const Main = () => {
         <title>Status | Smultar</title>
         <meta key='description' name="description" content="Performance at a glance, letting you know whats up with my network." />
         <meta key='keywords' name="keywords" content="Smultar, Games, Aether Link, Aether, Final Fantasy, Services, Free, Quality, Patreon, Prometheus, Blender"/>
-        <meta key='theme' name="theme-color" content="#B83200"/>
+        <meta key='theme' name="theme-color" content="#ffffff"/>
         <meta key='lang' name="language" content="English"/>
         <meta key='author' name="author" content="Smultar"/>
         <meta key='sitename' property="og:site_name" content="Smultar" />
