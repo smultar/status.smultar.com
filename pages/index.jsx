@@ -46,7 +46,7 @@ const Main = () => {
     <div className='page'>
       <Head>
         <title>Status | Smultar</title>
-        <meta key='description' name="description" content="Supporting mods creators around the globe." />
+        <meta key='description' name="description" content="Performance at a glance, letting you know whats up with my network." />
         <meta key='keywords' name="keywords" content="Smultar, Games, Aether Link, Aether, Final Fantasy, Services, Free, Quality, Patreon, Prometheus, Blender"/>
         <meta key='theme' name="theme-color" content="#B83200"/>
         <meta key='lang' name="language" content="English"/>
@@ -106,4 +106,4 @@ const Main = () => {
   )
 };
 
-export default dynamic(() => Promise.resolve(Main), { ssr: false });
+export default dynamic(() => Promise.resolve(Main), { ssr: true });
