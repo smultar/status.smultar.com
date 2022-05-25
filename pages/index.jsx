@@ -91,7 +91,7 @@ const Main = () => {
               </div>
 
               { services.length >= 1 && 
-                <p className='info'>This is a general overview of all of my services, to see more information on a per cluster/service basis by clicking on it instead.</p>
+                <p className='info'>This is a general overview of all of my services, click to see more information instead.</p>
               }
               
               <div className='fade'></div>
