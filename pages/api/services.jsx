@@ -72,7 +72,7 @@ export default async function handler(request, response) {
                   uid: "grafanacloud-prom"
                 },
                 editorMode: "code",
-                expr: "avg(probe_duration_seconds{probe=~\".*\", instance=\"https://wasabi.com\", job=\"Aether Link - CDN\"} * on (instance, job,probe,config_version) group_left probe_success{probe=~\".*\",instance=\"https://wasabi.com\", job=\"Aether Link - CDN\"} >= 0) by (probe)",
+                expr: "avg(probe_duration_seconds{probe=~\".*\", instance=\"https://www.backblaze.com/\", job=\"Aether Link - CDN\"} * on (instance, job,probe,config_version) group_left probe_success{probe=~\".*\",instance=\"https://www.backblaze.com/\", job=\"Aether Link - CDN\"} >= 0) by (probe)",
                 legendFormat: "AL-CDN",
                 range: true,
                 refId: "Aether Link CDN"
