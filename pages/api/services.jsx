@@ -108,7 +108,7 @@ export default async function handler(request, response) {
         let request = await fetch('https://smultar.grafana.net/api/ds/query', { ...options });
         let processed = await request.json();
 
-        console.log(processed);
+        // console.log(processed);
 
         return {
             aetherlink: {

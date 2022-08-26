@@ -68,7 +68,7 @@ const Main = () => {
                   <p className='title'>smultar status</p>
                   <p className='subtitle'>performance at a glance <span>V{process.env.VERSION} build ({process.env.BUILD})</span></p>
                   { services.length == 0 && 
-                    <p className='refresh'>Its been <span>{refresh}</span> second{(refresh > 1) ? 's': ''} ago</p>
+                    <p className='refresh'>Its been <span>{refresh}</span> second{(refresh > 1) ? 's': ''} ago {(refresh > 40) ? `, it shouldn't take this long` : ``}</p>
                   }
                   { services.length >= 1 && 
                     <p className='refresh'>Last refresh was <span>{refresh}</span> second{(refresh > 1) ? 's': ''} ago</p>
