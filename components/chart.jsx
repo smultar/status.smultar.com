@@ -33,11 +33,15 @@ export function LineChart({ name, data }) {
           point: {
               radius: 0
           }
+        },
+        maintainAspectRatio: false,
+        animation: {
+            duration: 700
         }
     };
 
-    const x = data[0].map((item) => item);
-    const y = data[1].map((item) => item);
+    const x = data[0]?.map((item) => item) ?? [];
+    const y = data[1]?.map((item) => item) ?? [];
 
     const series = {
         labels: x.map((item) => {
@@ -53,8 +57,6 @@ export function LineChart({ name, data }) {
             }
         ]
     }
-
-    console.log(series);
 
     return <Line options={options} data={series}></Line>
 

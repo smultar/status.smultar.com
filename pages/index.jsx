@@ -78,6 +78,7 @@ const Main = () => {
 
                 <div className='helm'>
                   <img className={classNames({enabled: mode })} src='/svgs/graph.svg' onClick={() => setMode(!mode)}></img>
+                  <img className={classNames({enabled: mode })} src='/svgs/graph.svg' onClick={() => setMode(!mode)}></img>
                   <img src='/svgs/auth.svg'></img>
                 </div>
               </div>
