@@ -51,7 +51,7 @@ export function LineChart({ name, data }) {
             return `${hours}:${date.getMinutes()} ${date.getHours() >= 12 ? 'PM' : 'AM'}`;
         }),
         datasets: [{
-                label: 'Ping',
+                label: 'Ping (ms)',
                 data: y.map((item) => +((item).toFixed(4) * 1000).toFixed(2)),
                 tension: 0.1
             }
