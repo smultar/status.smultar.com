@@ -11,11 +11,13 @@
         align-items: center; display: flex; flex-direction: column;
         justify-content: center; 
 
+        .row {
+            display: flex; flex-direction: row; align-items: center;
+        }
 
         .top {
             width: 100%;
-            display: flex; flex-direction: row;
-            align-items: center;
+            display: flex; flex-direction: row; align-items: center;
 
             img {
                 margin-right: 10px;
@@ -47,11 +49,40 @@
                 }
             }
 
+            .helm {
+                width: 100px; height: 100%; display: flex; flex-direction: row; justify-content: flex-end; align-items: center;
+
+                img {
+                    height: 20px; width: 20px; opacity: 0;
+                    transform: translateX(-50px);
+                    transition: all ease 0.7s;
+
+                    &.enabled {
+                        opacity: 1; transform: translateX(0px); filter: drop-shadow(0px 0px 5px $font-color); 
+                    }
+                }
+
+                &:hover {
+                    img {
+                        opacity: 1; transform: translateX(0px);
+
+                        &:hover {
+                            filter: drop-shadow(0px 0px 1px $font-color); 
+                            transform: scale(1.2); cursor: pointer;
+
+                            &.enabled {
+                                filter: drop-shadow(0px 0px 5px $font-color); 
+                            }
+                        }
+                    }
+                }
+            }
+
         }
         
         .services {
             width: 100%; box-sizing: border-box;
-            margin-top: 20px; display: flex; flex-direction: row;
+            margin-top: 20px; display: flex; flex-direction: row; gap: 20px;
             justify-content: space-between; transition: ease all 0.7s;
 
 
@@ -81,7 +112,6 @@
                 border-radius: 5px 5px 0px 0px;
                 transition: all ease 0.7s;
                 margin-bottom: 10px;
-                margin-right: 20px;
                 
                 align-items: center; display: flex; flex-direction: row;
 

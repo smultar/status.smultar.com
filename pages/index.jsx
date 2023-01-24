@@ -4,12 +4,13 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-
+import classNames from 'classnames';
 
 const Main = () => {
 
   const [services, setServices] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [mode, setMode] = useState(false);
   const [refresh, setRefresh] = useState(0);
 
   const fetchServices = async () => {
@@ -17,7 +18,7 @@ const Main = () => {
     const request = await fetch('/api/services');
     const response = await request.json();
 
-    setServices([...response.services]); setRefresh(1);
+    if (response) setServices([...response.services]); setRefresh(1);
   }
 
   useEffect(() => {
@@ -29,14 +30,12 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => fetchServices(),30 * 1000);
-
+    const interval = setInterval(() => fetchServices(), 30 * 1000);
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => setRefresh((time) => time + 1),1 * 1000);
-
+    const interval = setInterval(() => setRefresh((time) => time + 1), 1 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -45,7 +44,7 @@ const Main = () => {
   return (
     <div className='page'>
       <Head>
-        <title>Status | Smultar</title>
+        <title>Smultar - Status</title>
         <meta key='description' name="description" content="Performance at a glance, letting you know whats up with my network." />
         <meta key='keywords' name="keywords" content="Smultar, Games, Aether Link, Aether, Final Fantasy, Services, Free, Quality, Patreon, Prometheus, Blender"/>
         <meta key='theme' name="theme-color" content="#ffffff"/>
@@ -63,16 +62,23 @@ const Main = () => {
       <div className='page-content'>
             <div className='grid'>
               <div className='top'>
-                <img src='/svgs/smultar.svg' layout='responsive' onClick={() => {Fetch()}}></img>
-                <div className='text-fields'>
-                  <p className='title'>smultar status</p>
-                  <p className='subtitle'>performance at a glance <span>V{process.env.VERSION} build ({process.env.BUILD})</span></p>
-                  { services.length == 0 && 
-                    <p className='refresh'>Its been <span>{refresh}</span> second{(refresh > 1) ? 's': ''} ago {(refresh > 40) ? `, it shouldn't take this long` : ``}</p>
-                  }
-                  { services.length >= 1 && 
-                    <p className='refresh'>Last refresh was <span>{refresh}</span> second{(refresh > 1) ? 's': ''} ago</p>
-                  }
+                <div className='row'>
+                  <img src='/svgs/smultar.svg' layout='responsive' onClick={() => {Fetch()}}></img>
+                  <div className='text-fields'>
+                    <p className='title'>smultar status</p>
+                    <p className='subtitle'>performance at a glance <span>V{process.env.VERSION} build ({process.env.BUILD})</span></p>
+                    { services.length == 0 && 
+                      <p className='refresh'>Its been <span>{refresh}</span> second{(refresh > 1) ? 's': ''} ago {(refresh > 40) ? `, it shouldn't take this long` : ``}</p>
+                    }
+                    { services.length >= 1 && 
+                      <p className='refresh'>Last refresh was <span>{refresh}</span> second{(refresh > 1) ? 's': ''} ago</p>
+                    }
+                  </div>
+                </div>
+
+                <div className='helm'>
+                  <img className={classNames({enabled: mode })} src='/svgs/graph.svg' onClick={() => setMode(!mode)}></img>
+                  <img src='/svgs/auth.svg'></img>
                 </div>
               </div>
 
@@ -83,7 +89,7 @@ const Main = () => {
                 { services.length >= 1 && 
                   services.map((service, index) => {
                       return (
-                        <Service key={index} name={service.name} image={service.image} status={service.status} sub={service.sub} index={index} selected={(selected == index)} select={() => {(selected == index) ? setSelected(null) : setSelected(index)}}/>
+                        <Service key={index} name={service.name} image={service.image} status={service.status} sub={service.sub} index={index} selected={(selected == index)} select={() => {(selected == index) ? setSelected(null) : setSelected(index)}} mode={mode}/>
                       )
                     }
                   )
@@ -98,9 +104,10 @@ const Main = () => {
 
             </div>
               <div className='footer'>
+
                 <p>Feel like something is broken? Contact <Link href="https://discord.gg/pBHJU7c"><span>Smultar</span></Link></p>
               </div>
-        </div>
+      </div>
 
     </div>
   )

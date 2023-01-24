@@ -1,6 +1,6 @@
 {
   "name": "status.smultar.com",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,14 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.1.6",
-    "nextjs-progressbar": "^0.0.14",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
-    "sass": "^1.51.0"
+    "chart.js": "^4.2.0",
+    "classnames": "^2.3.2",
+    "next": "13.1.5",
+    "nextjs-progressbar": "^0.0.16",
+    "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "18.2.0",
+    "sass": "^1.57.1"
   },
   "devDependencies": {
-    "eslint": "8.15.0",
-    "eslint-config-next": "12.1.6"
+    "eslint": "8.32.0",
+    "eslint-config-next": "13.1.5"
   }
 }

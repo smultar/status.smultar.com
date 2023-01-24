@@ -8,18 +8,12 @@ const latency = (type, value) => {
 
     switch (type) {
         case 'ms': {
-            value = value.toFixed(4);
-
-            value = value * 1000;
-
-            value = value.toFixed(0)
-            return value;
+            return (value.toFixed(4) * 1000).toFixed(0);
         }
     };
 
 
 }
-
 
 export default async function handler(request, response) { 
     
@@ -30,7 +24,7 @@ export default async function handler(request, response) {
     const GrafanaFetch = async () => {
 
         let body = {
-          from: `${new Date().getTime()}`, to: `${new Date().getTime()}`,
+          from: `now-8h`, to: `${new Date().getTime()}`,
           queries: [
               {
                 datasource: {
@@ -108,21 +102,25 @@ export default async function handler(request, response) {
         let request = await fetch('https://smultar.grafana.net/api/ds/query', { ...options });
         let processed = await request.json();
 
-        // console.log(processed);
+        console.log(processed);
 
         return {
             aetherlink: {
                 cdn: {
-                    ping: latency('ms', processed.results['Aether Link CDN'].frames[0].data.values[1][0]),
+                    ping: (processed.results['Aether Link CDN'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    data: processed.results['Aether Link CDN'].frames[0].data.values
                 },
                 live: {
-                    ping: latency('ms', processed.results['Aether Link Live'].frames[0].data.values[1][0]),
+                    ping: (processed.results['Aether Link Live'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    data: processed.results['Aether Link Live'].frames[0].data.values
                 },
                 beta: {
-                    ping: latency('ms', processed.results['Aether Link Beta'].frames[0].data.values[1][0]),
+                    ping: (processed.results['Aether Link Beta'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    data: processed.results['Aether Link Beta'].frames[0].data
                 },
                 dev: {
-                    ping: latency('ms', processed.results['Aether Link Development'].frames[0].data.values[1][0]),
+                    ping: (processed.results['Aether Link Development'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    data: processed.results['Aether Link Development'].frames[0].data
                 }
             },
 
@@ -130,7 +128,8 @@ export default async function handler(request, response) {
             comissiant: null,
             prometheus: {
                 live: {
-                    ping: latency('ms', processed.results['Prometheus Support'].frames[0].data.values[1][0]),
+                    ping: (processed.results['Prometheus Support'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    data: processed.results['Prometheus Support'].frames[0].data.values
                 },
             },
             smultar: null,
@@ -151,9 +150,11 @@ export default async function handler(request, response) {
                 image: '/svgs/aetherlink.svg',
                 status: {
                     ping: cache.services.aetherlink.live.ping,
+                    data: cache.services.aetherlink.live.data,
                     type: 'API/WEBSITE',
                     state: 'active',
                     url: 'https://aetherlink.app/',
+
                 },
                 sub: [
                     {
@@ -161,6 +162,7 @@ export default async function handler(request, response) {
                         image: '/svgs/aetherlink-cdn.svg',
                         status: {
                             ping: cache.services.aetherlink.cdn.ping,
+                            data: cache.services.aetherlink.cdn.data,
                             type: 'upload server',
                             state: 'active',
                             url: 'https://cdn.aetherlink.app/',
@@ -171,6 +173,7 @@ export default async function handler(request, response) {
                         image: '/svgs/aetherlink-beta.svg',
                         status: {
                             ping: cache.services.aetherlink.beta.ping,
+                            data: cache.services.aetherlink.beta.data,
                             type: 'WEBSITE',
                             state: 'active',
                             url: 'https://beta.aetherlink.app/',
@@ -181,6 +184,7 @@ export default async function handler(request, response) {
                         image: '/svgs/aetherlink-dev.svg',
                         status: {
                             ping: cache.services.aetherlink.dev.ping,
+                            data: cache.services.aetherlink.dev.data,
                             type: 'WEBSITE',
                             state: 'active',
                             url: 'https://dev.aetherlink.app/',
@@ -193,6 +197,7 @@ export default async function handler(request, response) {
                 image: '/svgs/blender.svg',
                 status: {
                     ping: 0,
+                    data: null,
                     type: 'bot/website',
                     state: 'active',
                 },
@@ -202,6 +207,7 @@ export default async function handler(request, response) {
                         image: '/svgs/blender-bot.svg',
                         status: {
                             ping: 0,
+                            data: null,
                             type: 'discord bot',
                             state: 'disabled',
                         },
@@ -211,6 +217,7 @@ export default async function handler(request, response) {
                         image: '/svgs/blender-web.svg',
                         status: {
                             ping: 0,
+                            data: null,
                             type: 'website',
                             state: 'disabled',
                         },
@@ -222,6 +229,7 @@ export default async function handler(request, response) {
                 image: '/svgs/commissant.svg',
                 status: {
                     ping: 0,
+                    data: null,
                     type: 'in development',
                     state: 'dev',
                 },
@@ -232,6 +240,7 @@ export default async function handler(request, response) {
                 image: '/svgs/prometheus.svg',
                 status: {
                     ping: 0,
+                    data: null,
                     type: 'bot/website',
                     state: 'dev',
                 },
@@ -242,6 +251,7 @@ export default async function handler(request, response) {
                 image: '/svgs/smultar.svg',
                 status: {
                     ping: 0,
+                    data: null,
                     type: 'website',
                     state: 'dev',
                 },
@@ -252,6 +262,7 @@ export default async function handler(request, response) {
                 image: '/svgs/smultar.svg',
                 status: {
                     ping: 0,
+                    data: null,
                     type: 'pr/game/service',
                     state: 'disabled',
                 },
