@@ -51,31 +51,54 @@
 
             .helm {
                 width: 100px; height: 100%; display: flex; flex-direction: row; justify-content: flex-end; align-items: center;
+                animation: fadeIn 0.6s forwards ease-in;
 
-                img {
-                    height: 20px; width: 20px; opacity: 0;
-                    transform: translateX(-50px);
-                    transition: all ease 0.7s;
+                p {
+                    margin: 0; margin-right: 10px;
+                    font-size: 12px; color: $font-color; position: relative;
+
+                    display: flex; flex-direction: row; align-items: center;
+
+                    img {
+                        height: 20px; width: 20px; opacity: 1;
+                        transition: all ease 0.7s;
+                    }
+
+                    &::after {
+                        content: ''; position: absolute; top: 0; left: -20px;
+                        height: 20px; width: 1px; margin-left: 10px;
+                        background-color: $font-color-alt;
+                    }
+
+                    &::before {
+                        content: 'Off'; position: absolute; top: 50%; transform: translateY(-50%); right: -35%;
+                        color: $font-color-alt; opacity: 1; transition: all ease 0.7s;
+                    }
 
                     &.enabled {
-                        opacity: 1; transform: translateX(0px); filter: drop-shadow(0px 0px 5px $font-color) hue-rotate(204deg); 
-                    }
-                }
-
-                &:hover {
-                    img {
-                        opacity: 1; transform: translateX(0px);
-
-                        &:hover {
-                            filter: drop-shadow(0px 0px 1px $font-color); 
-                            transform: scale(1.2); cursor: pointer;
-
-                            &.enabled {
-                                filter: drop-shadow(0px 0px 5px $font-color); 
-                            }
+                        
+                        &::before {
+                            content: 'On'; color: $on;
+                            opacity: 1;
+                        }
+                        &::after {
+                            background-color: $on;
+                            opacity: 1;
                         }
                     }
-                }
+
+                    &:hover {
+                        cursor: pointer;
+                        
+                        img {
+                            filter: drop-shadow(0px 0px 1px $font-color); 
+                        }
+                    }
+
+                    transition: all ease 0.7s;
+                };
+
+
             }
 
         }
