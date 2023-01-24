@@ -81,6 +81,18 @@ export default async function handler(request, response) {
                 legendFormat: "PM-WEB",
                 range: true,
                 refId: "Prometheus Support"
+              },
+              {
+                datasource: {
+                  type: "prometheus",
+                  uid: "grafanacloud-prom"
+                },
+                editorMode: "code",
+                expr: "avg(probe_duration_seconds{probe=~\".*\", instance=\"https://smultar.com\", job=\"Smultar.com\"} * on (instance, job,probe,config_version) group_left probe_success{probe=~\".*\",instance=\"https://smultar.com\", job=\"Smultar.com\"} >= 0) by (probe)",
+                hide: false,
+                legendFormat: "SMUL",
+                range: true,
+                refId: "Smultar.com"
               }
           ]
         };
@@ -132,7 +144,12 @@ export default async function handler(request, response) {
                     data: processed.results['Prometheus Support'].frames[0].data.values
                 },
             },
-            smultar: null,
+            smultar: {
+                live: {
+                    ping: (processed.results['Smultar.com'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    data: processed.results['Smultar.com'].frames[0].data.values
+                }
+            },
             smgames: null,
         }
     
@@ -250,10 +267,10 @@ export default async function handler(request, response) {
                 name: 'smultar',
                 image: '/svgs/smultar.svg',
                 status: {
-                    ping: 0,
-                    data: null,
+                    ping: cache.services.smultar.live.ping,
+                    data: cache.services.smultar.live.data,
                     type: 'website',
-                    state: 'dev',
+                    state: 'active',
                 },
                 sub: []
             },
