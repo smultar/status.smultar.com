@@ -114,24 +114,22 @@ export default async function handler(request, response) {
         let request = await fetch('https://smultar.grafana.net/api/ds/query', { ...options });
         let processed = await request.json();
 
-        console.log(processed);
-
         return {
             aetherlink: {
                 cdn: {
-                    ping: (processed.results['Aether Link CDN'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    ping: (processed.results['Aether Link CDN'].frames[0].data.values[1][processed.results['Aether Link CDN'].frames[0].data.values[1].length - 1].toFixed(4) * 1000).toFixed(0),
                     data: processed.results['Aether Link CDN'].frames[0].data.values
                 },
                 live: {
-                    ping: (processed.results['Aether Link Live'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    ping: ( processed.results['Aether Link Live'].frames[0].data.values[1][processed.results['Aether Link Live'].frames[0].data.values[1].length - 1].toFixed(4) * 1000).toFixed(0),
                     data: processed.results['Aether Link Live'].frames[0].data.values
                 },
                 beta: {
-                    ping: (processed.results['Aether Link Beta'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    ping: (processed.results['Aether Link Beta'].frames[0].data.values[1][processed.results['Aether Link Beta'].frames[0].data.values[1].length - 1].toFixed(4) * 1000).toFixed(0),
                     data: processed.results['Aether Link Beta'].frames[0].data.values
                 },
                 dev: {
-                    ping: (processed.results['Aether Link Development'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    ping: (processed.results['Aether Link Development'].frames[0].data.values[1][processed.results['Aether Link Development'].frames[0].data.values[1].length - 1].toFixed(4) * 1000).toFixed(0),
                     data: processed.results['Aether Link Development'].frames[0].data.values
                 }
             },
@@ -140,13 +138,13 @@ export default async function handler(request, response) {
             comissiant: null,
             prometheus: {
                 live: {
-                    ping: (processed.results['Prometheus Support'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    ping: (processed.results['Prometheus Support'].frames[0].data.values[1][processed.results['Prometheus Support'].frames[0].data.values[1].length - 1].toFixed(4) * 1000).toFixed(0),
                     data: processed.results['Prometheus Support'].frames[0].data.values
                 },
             },
             smultar: {
                 live: {
-                    ping: (processed.results['Smultar.com'].frames[0].data.values[1][0].toFixed(4) * 1000).toFixed(0),
+                    ping: (processed.results['Smultar.com'].frames[0].data.values[1][processed.results['Smultar.com'].frames[0].data.values[1].length - 1].toFixed(4) * 1000).toFixed(0),
                     data: processed.results['Smultar.com'].frames[0].data.values
                 }
             },
